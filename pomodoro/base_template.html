@@ -23,8 +23,14 @@
       <div class="navbar-inner">
 		<a class="brand" href="#">Pomodoro</a>
 		<ul class="nav">
-		  <li class="active"><a href="#">Timer</a></li>
-		  <li><a href="#">History</a></li>
+		  {% if view == "timer" %}
+		    <li class="active"><a href="#">Timer</a></li>
+	        <li><a href="history">History</a></li>
+		  {% elif view == "history" %}
+		    <li><a href="/">Timer</a></li>
+		    <li class="active"><a href="#">History</a></li>
+		  {% endif %}
+		    
 		</ul>
 	  </div>
 	</div>

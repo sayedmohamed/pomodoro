@@ -8,6 +8,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'app.views.home', name='home'),
+	url(r'^history/', 'app.views.history', name='history'),
     # url(r'^pomodoro/', include('pomodoro.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
