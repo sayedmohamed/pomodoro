@@ -1,7 +1,17 @@
 {% extends "base_template.html" %}
-{% load webdesign %}
+{% load staticfiles %}
+{% load static %}
 
 {% block body %}
-{% lorem 4 %}
+<script src="{% get_static_prefix %}js/timer.js"></script>
+<div class="span12 pagination-centered">
+	<div class="btn-group">
+		<button class="btn btn-primary">Pomodoro</button>
+		<button class="btn">Short Break</button>
+		<button class="btn">Long Break</button>
+	</div>
+	<br /><br />
+	<p class="lead" id="timer"><strong>Click one of the timers to begin</strong></p>
+</div>
 {% endblock %}
 
