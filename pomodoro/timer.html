@@ -6,12 +6,13 @@
 <script src="{% get_static_prefix %}js/timer.js"></script>
 <div class="container pagination-centered">
 	<div class="btn-group">
-		<button class="btn btn-primary">Pomodoro</button>
-		<button class="btn">Short Break</button>
-		<button class="btn">Long Break</button>
+		<button class="btn btn-primary" onclick="runTimer(pomodoroInterval, completedText)">Pomodoro</button>
+		<button class="btn" onclick="runTimer(shortBreakInterval, shortBreakText)">Short Break</button>
+		<button class="btn" onclick="runTimer(longBreakInterval, longBreakText)">Long Break</button>
 	</div>
 	<br /><br />
 	<p class="lead" id="timer"><strong>Click one of the timers to begin</strong></p>
+	<audio preload="auto" autobuffer id="bell" src="{% get_static_prefix %}bell.wav">Your user agent does not support the HTML5 Audio element.</audio>
 </div>
 {% endblock %}
 
