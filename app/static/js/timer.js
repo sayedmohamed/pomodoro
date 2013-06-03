@@ -1,15 +1,15 @@
 // Length of our timers
 // 25 minutes, 5 minutes, 10 minutes
-pomodoroInterval = 1500000;
-shortBreakInterval = 300000;
-longBreakInterval = 900000;
+var pomodoroInterval = 1500000;
+var shortBreakInterval = 300000;
+var longBreakInterval = 900000;
 
-moveOn = false; // If we want to move on to breaks automatically
+var moveOn = false; // If we want to move on to breaks automatically
 
 // Pieces of text
-completedText = "You are finished!";
-shortBreakText = "Short break is over.";
-longBreakText = "Long break is over.";
+var completedText = "You are finished!";
+var shortBreakText = "Short break is over.";
+var longBreakText = "Long break is over.";
 
 // Nice format function
 // first, checks if it isn't implemented yet
