@@ -5,6 +5,7 @@ var shortBreakInterval = 300000;
 var longBreakInterval = 900000;
 
 var moveOn = false; // If we want to move on to breaks automatically
+var running = false; // If a timer is currrently running
 
 // Pieces of text
 var completedText = "You are finished!";
@@ -26,32 +27,37 @@ if (!String.prototype.format) {
 }
 
 function runTimer(interval, doneText) {
-	console.log("Starting timer...");
-	var start = new Date;
-	var bell = document.getElementById("bell");
-	var timer = document.getElementById("timer");
-	var remaining = interval
+	if (!running) {
+		console.log("Starting timer...");
+		running = true;
 
-	// Every second update the timer
-	updater = setInterval(function() {
-		remaining -= 1000;
-		var minutes = Math.floor(remaining / 60000);
-		var seconds = Math.floor((remaining - minutes * 60000) / 1000);
+		var start = new Date;
+		var bell = document.getElementById("bell");
+		var timer = document.getElementById("timer");
+		var remaining = interval
 
-		if (minutes >= 1) {
-			text = "{0} minutes and {1} seconds remaining".format(minutes, seconds);
-		} else {
-			text = "{0} seconds remaining".format(seconds);
-		}
+		// Every second update the timer
+		updater = setInterval(function() {
+			remaining -= 1000;
+			var minutes = Math.floor(remaining / 60000);
+			var seconds = Math.floor((remaining - minutes * 60000) / 1000);
+
+			if (minutes >= 1) {
+				text = "{0} minutes and {1} seconds remaining".format(minutes, seconds);
+			} else {
+				text = "{0} seconds remaining".format(seconds);
+			}
+			
+			timer.innerHTML = text;
+		}, 1000);
 		
-		timer.innerHTML = text;
-	}, 1000);
-	
-	finished = setInterval(function() {
-		console.log(doneText);
-		bell.play();
-		timer.innerHTML = doneText;
-		clearInterval(updater);
-		clearInterval(finished);
-	}, interval);
+		finished = setInterval(function() {
+			console.log(doneText);
+			bell.play();
+			timer.innerHTML = doneText;
+			clearInterval(updater);
+			clearInterval(finished);
+			running = false;
+		}, interval);
+	}
 }
