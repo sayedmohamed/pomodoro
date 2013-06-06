@@ -2,7 +2,7 @@
 
 1. Base template _V_
 2. Timer _V_
-3. History log
-4. User authentication
-5. User history logs
-6. Task list
+3. Task list
+4. History log
+5. User authentication
+6. User history logs
