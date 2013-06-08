@@ -12,7 +12,9 @@
 	</div>
 	<br /><br />
 	<p class="lead" id="timer"><strong>Click one of the timers to begin</strong></p>
-	<audio preload="auto" autobuffer id="bell" src="{% get_static_prefix %}bell.wav">Your user agent does not support the HTML5 Audio element.</audio>
+	<audio preload="auto" autobuffer id="bell" src="{% get_static_prefix %}bell.wav"><span class="label label-warning">Warning</span>
+ Your user agent does not support the HTML5 Audio element.</audio>
+	<div class="btn-group">
 </div>
 {% endblock %}
 
