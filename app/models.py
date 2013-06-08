@@ -1,3 +1,21 @@
 from django.db import models
 
-# Create your models here.
+class Task(models.Model):
+	name = models.CharField(max_length=100)
+
+	PRIORITIES = (
+		('L', 'Low'),
+		('M', 'Medium'),
+		('H', 'High'),
+	)
+	priority = models.CharField(max_length=1, choices=PRIORITIES)
+
+	# Date information for sorting
+	created = models.DateField()
+	completed = models.BooleanField()
+	length = models.IntegerField()
+
+	# Amount of pomodoros
+	estimate = models.IntegerField()
+	actual = models.IntegerField()
+
