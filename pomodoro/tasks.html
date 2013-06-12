@@ -4,6 +4,9 @@
 
 {% block body %}
 <div class="container pagination-centered">
+	<h2>Tasks</h2>
+	<p><a href="tasks/new"><button class="btn btn-primary">Create New Task</button></p></a>
+
 	<table class="table">
 	{% for instance in data %}
 		{% for field, value in instance.fields.items %}
