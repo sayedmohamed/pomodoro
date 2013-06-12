@@ -1,4 +1,7 @@
 from django.db import models
+from django import forms
+from django.forms import ModelForm
+from datetime import datetime
 
 class Task(models.Model):
 	name = models.CharField(max_length=100)
@@ -18,4 +21,8 @@ class Task(models.Model):
 	# Amount of pomodoros
 	estimate = models.IntegerField()
 	actual = models.IntegerField()
+
+class TaskForm(ModelForm):
+	class Meta:
+		model = Task
 
