@@ -64,9 +64,9 @@ function runTimer(interval, doneText) {
 			console.log(doneText);
 			bell.play();
 			timer.innerHTML = doneText;
+			running = false;
 			clearInterval(updater);
 			clearInterval(finished);
-			running = false;
 		}, interval);
 	}
 }
