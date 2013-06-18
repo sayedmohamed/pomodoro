@@ -14,9 +14,9 @@ class Task(models.Model):
 	priority = models.CharField(max_length=1, choices=PRIORITIES)
 
 	# Date information for sorting
-	created = models.DateField()
+	created = models.DateField(editable=False)
 	completed = models.BooleanField()
-	length = models.IntegerField()
+	length = models.IntegerField(editable=False)
 
 	# Amount of pomodoros
 	estimate = models.IntegerField()
@@ -25,4 +25,5 @@ class Task(models.Model):
 class TaskForm(ModelForm):
 	class Meta:
 		model = Task
-
+		exclude = ['actual', 'completed']
+	

@@ -8,14 +8,24 @@
 	<p><a href="{% url 'tasksNew' %}"><button class="btn btn-primary">Create New Task</button></p></a>
 
 	<table class="table">
-	{% for instance in data %}
-		{% for field, value in instance.fields.items %}
-			<tr>
-				<td>{{ field }}</td>
-				<td>{{ value }}</td>
-			</tr>
-		{% endfor %}
+	<thead>
+		<th>Priority</th>
+		<th>Task</th>
+		<th>Estimated</th>
+		<th>Actual</th>
+		<th>Completed</th>
+	</thead>
+	<tbody>
+	{% for task in data %}
+	<tr>
+		<td>{{ task.priority }}</td>
+		<td>{{ task.name }}</td>
+		<td>{{ task.estimate }}</td>
+		<td>{{ task.actual }}</td>
+		<td>{{ task.completed }}</td>
+	</tr>
 	{% endfor %}
+	</tbody>
 	</table>
 </div>
 {% endblock %}
