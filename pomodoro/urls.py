@@ -12,6 +12,7 @@ urlpatterns = patterns('',
 	url(r'^history', 'app.views.history', name='history'),
 	url(r'^tasks/new', 'app.views.tasksNew', name='tasksNew'),
 	url(r'^tasks', 'app.views.tasks', name='tasks'),
+	url(r'^login', 'app.views.login', name='login'),
     # url(r'^pomodoro/', include('pomodoro.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

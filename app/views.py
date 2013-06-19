@@ -33,3 +33,9 @@ def tasksNew(request):
 
 def history(request):
 	return render(request, 'history.html', dictionary={'view': 'history'})
+
+def login(request):
+	if request.method == 'POST':
+		pass
+	
+	return render(request, 'login.html', dictionary={'view': 'login'})
