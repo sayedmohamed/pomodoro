@@ -1,7 +1,7 @@
 from django.db import models
 from django import forms
 from django.forms import ModelForm
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractBaseUser
 from datetime import datetime
 
 
@@ -31,7 +31,7 @@ class TaskForm(ModelForm):
 		exclude = ['actual', 'completed']
 	
 
-class Mortal(models.Model):
+class Mortal(AbstractBaseUser):
 	user = models.OneToOneField(User)
 	tasks = models.ManyToManyField(Task)
 

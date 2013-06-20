@@ -4,6 +4,21 @@
 
 {% block body %}
 <div class="container pagination-centered">
-	foobar
+	{% if msg == "logged" %}
+		<p>You are currently logged in.</p>
+		<form action="/login" method="post"> {% csrf_token %}
+		<p><input class="btn btn-inverse" type="submit" value="Logout" /></p>
+		</form>
+	{% elif msg == "success" %}
+		<div class="alert alert-success">
+			<h4>Success!</h4>
+			Your account is logged in.
+		</div>
+	{% else %}
+		<form action="/login" method="post"> {% csrf_token %}
+		{{ auth }}
+		<p><input class="btn btn-primary" type="submit" value="Login" /></p>
+		</form>
+	{% endif %}
 </div>
 {% endblock %}

@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.contrib.auth import forms as auforms
+from django.contrib import auth
 
 import models
 from datetime import datetime
@@ -35,7 +37,27 @@ def history(request):
 	return render(request, 'history.html', dictionary={'view': 'history'})
 
 def login(request):
-	if request.method == 'POST':
-		pass
+	if request.user.is_authenticated():
+		message = 'logged'
+		auform = None
+		if request.method == 'POST':
+			auth.logout(request)
+			message = ''
+			auform = auforms.AuthenticationForm()
+	elif request.method == 'POST':
+		auform = auforms.AuthenticationForm(None, request.POST)
+		message = ''
+		if auform.is_valid():
+			u = request.POST['username']
+			p = request.POST['password']
+			user = auth.authenticate(username=u, password=p)
+			if user is not None:
+				if user.is_active:
+					auth.login(request, user)
+					message = 'success'
+	else:
+		auform = auforms.AuthenticationForm()
+		message = ''
 	
-	return render(request, 'login.html', dictionary={'view': 'login'})
+	return render(request, 'login.html', dictionary={'view': 'login', 'auth': auform, 'msg': message})
+
