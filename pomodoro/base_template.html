@@ -43,7 +43,11 @@
 		    
 		</ul>
 		<ul class="nav pull-right">
+			{% if not user.is_authenticated %}
 		    <li><a href="{% url 'login' %}">Login</a></li>
+			{% else %}
+		    <li><a href="{% url 'login' %}">Logout</a></li>
+			{% endif %}
 		</ul>
 	  </div>
 	</div>
