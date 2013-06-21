@@ -17,13 +17,15 @@
 	</thead>
 	<tbody>
 	{% for task in data %}
+	{% if not task.completed %}
 	<tr>
 		<td>{{ task.priority }}</td>
 		<td>{{ task.name }}</td>
 		<td>{{ task.estimate }}</td>
 		<td>{{ task.actual }}</td>
-		<td>{{ task.completed }}</td>
+		<td><form method="post">{% csrf_token %}<button name="data" value="{{ task.id }}" class="btn btn-small" action="tasks" id="{{ task.id }}" type="submit">Done</button></form></td>
 	</tr>
+	{% endif %}
 	{% endfor %}
 	</tbody>
 	</table>

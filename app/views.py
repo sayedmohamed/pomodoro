@@ -15,6 +15,11 @@ def timer(request):
 
 def tasks(request):
 	data = models.Task.objects.all()
+	if request.method == 'POST':
+		value = request.POST['data']
+		task = models.Task.objects.get(pk=value)
+		task.completed = True
+		task.save()
 	return render(request, 'tasks.html', dictionary={'view': 'tasks', 'data': data})
 
 def tasksNew(request):
