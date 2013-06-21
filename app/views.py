@@ -19,8 +19,9 @@ def tasks(request):
 		value = request.POST['data']
 		task = models.Task.objects.get(pk=value)
 		task.completed = True
+		task.done = datetime.now()
 		task.save()
-	return render(request, 'tasks.html', dictionary={'view': 'tasks', 'data': data})
+	return render(request, 'tasks.html', dictionary={'view': 'tasks', 'data': data, 'num': len(data)})
 
 def tasksNew(request):
 	if request.method == 'POST':
@@ -31,6 +32,7 @@ def tasksNew(request):
 			m.completed = False
 			m.length = 25
 			m.created = datetime.now()
+			m.done = datetime.now()
 			m.save()
 			return HttpResponseRedirect('tasks/')
 	else:
@@ -39,7 +41,8 @@ def tasksNew(request):
 	return render(request, 'tasks_new.html', dictionary={'view': 'tasksNew', 'formset': f})
 
 def history(request):
-	return render(request, 'history.html', dictionary={'view': 'history'})
+	data = models.Task.objects.all()
+	return render(request, 'history.html', dictionary={'view': 'history', 'data': data})
 
 def login(request):
 	if request.user.is_authenticated():

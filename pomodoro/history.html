@@ -2,6 +2,31 @@
 {% load webdesign %}
 
 {% block body %}
-{% lorem 2 %}
+<div class="container pagination-centered">
+	<h2>History</h2>
+	<table class="table table-condensed">
+	<thead>
+		<th>Completed</th>
+		<th>Priority</th>
+		<th>Task</th>
+		<th>Estimated</th>
+		<th>Actual</th>
+	</thead>
+	<tbody>
+	{% for task in data %}
+	{% if task.completed %}
+	<tr>
+		<td>{{ task.done }}</td>
+		<td>{{ task.priority }}</td>
+		<td>{{ task.name }}</td>
+		<td>{{ task.estimate }}</td>
+		<td>{{ task.actual }}</td>
+	</tr>
+	{% endif %}
+	{% endfor %}
+	</tbody>
+	</table>
+</div>
+
 {% endblock %}
 

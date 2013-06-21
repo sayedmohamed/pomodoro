@@ -18,6 +18,7 @@ class Task(models.Model):
 	# Date information for sorting
 	created = models.DateField(editable=False)
 	completed = models.BooleanField()
+	done = models.DateField(editable=False)
 	length = models.IntegerField(editable=False)
 
 	# Amount of pomodoros
@@ -28,7 +29,7 @@ class Task(models.Model):
 class TaskForm(ModelForm):
 	class Meta:
 		model = Task
-		exclude = ['actual', 'completed']
+		exclude = ['actual', 'completed', 'done']
 	
 
 class Mortal(AbstractBaseUser):
