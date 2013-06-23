@@ -11,7 +11,8 @@ def home(request):
 	return render(request, 'index.html', dictionary={'view': 'home'})
 
 def timer(request):
-	return render(request, 'timer.html', dictionary={'view': 'timer'})
+	data = models.Task.objects.all()
+	return render(request, 'timer.html', dictionary={'view': 'timer', 'data': data})
 
 def tasks(request):
 	data = models.Task.objects.all()
@@ -26,8 +27,9 @@ def tasks(request):
 def tasksNew(request):
 	if request.method == 'POST':
 		f = models.TaskForm(request.POST)
-		if f.is_valid():
+		if f.is_valid() and request.user.is_authenticated():
 			m = f.save(commit=False)
+			m.user = request.user
 			m.actual = 0
 			m.completed = False
 			m.length = 25

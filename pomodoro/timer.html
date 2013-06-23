@@ -6,6 +6,24 @@
 <script src="{% get_static_prefix %}js/timer.js"></script>
 <div class="container pagination-centered">
 	<div class="btn-group">
+    <a id="task_" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		Task
+        <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu">
+    <!-- dropdown menu links -->
+	{% for task in data %}
+	{% ifequal user.username task.user %}
+	{% if not task.completed %}
+	<li><a tabindex="-1" href="#" onclick="document.getElementById('task_').innerHTML = '{{ task.name }} <span class=\'caret\'></span>'">{{ task.name }}</a></li>
+	{% endif %}
+    {% endifequal %}
+	{% endfor %}
+	
+    </ul>
+	</div>
+
+	<div class="btn-group">
 		<button class="btn btn-primary" onclick="runTimer(pomodoroInterval, completedText)">Pomodoro</button>
 		<button class="btn" onclick="runTimer(shortBreakInterval, shortBreakText)">Short Break</button>
 		<button class="btn" onclick="runTimer(longBreakInterval, longBreakText)">Long Break</button>

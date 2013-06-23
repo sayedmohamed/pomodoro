@@ -7,6 +7,7 @@ from datetime import datetime
 
 class Task(models.Model):
 	name = models.CharField(max_length=100)
+	user = models.CharField(max_length=100, editable=False)
 
 	PRIORITIES = (
 		('L', 'Low'),
@@ -29,10 +30,5 @@ class Task(models.Model):
 class TaskForm(ModelForm):
 	class Meta:
 		model = Task
-		exclude = ['actual', 'completed', 'done']
+		exclude = ['actual', 'completed', 'done', 'user']
 	
-
-class Mortal(AbstractBaseUser):
-	user = models.OneToOneField(User)
-	tasks = models.ManyToManyField(Task)
-

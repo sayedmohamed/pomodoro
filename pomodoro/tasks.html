@@ -17,6 +17,7 @@
 	</thead>
 	<tbody>
 	{% for task in data %}
+	{% ifequal user.username task.user %}
 	{% if not task.completed %}
 	<tr>
 		<td>{{ task.priority }}</td>
@@ -26,6 +27,7 @@
 		<td><form method="post">{% csrf_token %}<button name="data" value="{{ task.id }}" class="btn btn-small" action="tasks" id="{{ task.id }}" type="submit">Done</button></form></td>
 	</tr>
 	{% endif %}
+	{% endifequal %}
 	{% endfor %}
 	</tbody>
 	</table>
