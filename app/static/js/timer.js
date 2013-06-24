@@ -1,6 +1,6 @@
 // Length of our timers
 // 25 minutes, 5 minutes, 10 minutes
-var pomodoroInterval = 1500;
+var pomodoroInterval = 1500000;
 var shortBreakInterval = 300000;
 var longBreakInterval = 900000;
 
@@ -66,7 +66,7 @@ function updateTimer(timer, remaining) {
 function runTimer(interval, doneText) {
 	var timer = document.getElementById("timer");
 
-	if (typeof(i_d) == 'undefined') {
+	if ((!running) && (typeof(i_d) == 'undefined') && (interval == pomodoroInterval)) {
 		timer.innerHTML = 'Please select a task';
 	} else if (!running) {
 		console.log("Starting timer...");
