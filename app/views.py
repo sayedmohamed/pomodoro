@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.contrib.auth import forms as auforms
 from django.contrib import auth
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 import models
 from datetime import datetime
@@ -10,10 +12,19 @@ from datetime import datetime
 def home(request):
 	return render(request, 'index.html', dictionary={'view': 'home'})
 
+@csrf_exempt
+@login_required(login_url='/login')
 def timer(request):
+	if request.method == 'POST':
+		i_d = request.POST['timer']
+		task = models.Task.objects.get(pk=i_d)
+		task.actual += 1
+		task.save();
+
 	data = models.Task.objects.all()
 	return render(request, 'timer.html', dictionary={'view': 'timer', 'data': data})
 
+@login_required(login_url='/login')
 def tasks(request):
 	data = models.Task.objects.all()
 	if request.method == 'POST':
@@ -24,6 +35,7 @@ def tasks(request):
 		task.save()
 	return render(request, 'tasks.html', dictionary={'view': 'tasks', 'data': data, 'num': len(data)})
 
+@login_required(login_url='/login')
 def tasksNew(request):
 	if request.method == 'POST':
 		f = models.TaskForm(request.POST)
@@ -42,6 +54,7 @@ def tasksNew(request):
 	
 	return render(request, 'tasks_new.html', dictionary={'view': 'tasksNew', 'formset': f})
 
+@login_required(login_url='/login')
 def history(request):
 	data = models.Task.objects.all()
 	return render(request, 'history.html', dictionary={'view': 'history', 'data': data})
@@ -70,4 +83,3 @@ def login(request):
 		message = ''
 	
 	return render(request, 'login.html', dictionary={'view': 'login', 'auth': auform, 'msg': message})
-

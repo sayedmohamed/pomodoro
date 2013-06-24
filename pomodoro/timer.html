@@ -2,8 +2,12 @@
 {% load staticfiles %}
 {% load static %}
 
-{% block body %}
+{% block extrahead %}
 <script src="{% get_static_prefix %}js/timer.js"></script>
+{% endblock %}
+
+{% block body %}
+
 <div class="container pagination-centered">
 	<div class="btn-group">
     <a id="task_" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -15,7 +19,7 @@
 	{% for task in data %}
 	{% ifequal user.username task.user %}
 	{% if not task.completed %}
-	<li><a tabindex="-1" href="#" onclick="document.getElementById('task_').innerHTML = '{{ task.name }} <span class=\'caret\'></span>'">{{ task.name }}</a></li>
+	<li><a tabindex="-1" href="#" onclick="document.getElementById('task_').innerHTML = '{{ task.name }} <span class=\'caret\'></span>';assignId({{ task.id }})">{{ task.name }}</a></li>
 	{% endif %}
     {% endifequal %}
 	{% endfor %}

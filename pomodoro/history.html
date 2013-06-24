@@ -1,6 +1,9 @@
 {% extends "base_template.html" %}
 {% load webdesign %}
 
+{% block extrahead %}
+{% endblock %}
+
 {% block body %}
 <div class="container pagination-centered">
 	<h2>History</h2>
@@ -13,7 +16,7 @@
 		<th>Actual</th>
 	</thead>
 	<tbody>
-	{% for task in data %}
+	{% for task in data reversed %}
 	{% ifequal user.username task.user %}
 	{% if task.completed %}
 	<tr>

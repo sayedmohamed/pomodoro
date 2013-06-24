@@ -1,6 +1,6 @@
 // Length of our timers
 // 25 minutes, 5 minutes, 10 minutes
-var pomodoroInterval = 1500000;
+var pomodoroInterval = 1500;
 var shortBreakInterval = 300000;
 var longBreakInterval = 900000;
 
@@ -26,6 +26,28 @@ if (!String.prototype.format) {
   };
 }
 
+var i_d;
+function assignId(i, csrf) {
+	i_d = i
+}
+
+function postToView(view, i) {
+    var form = document.createElement('form');
+	form.setAttribute('method', 'post');
+	form.setAttribute('action', view);
+
+	var input = document.createElement('input');
+	input.setAttribute('type', 'hidden');
+	input.setAttribute('name', view);
+	input.setAttribute('value', i);
+
+	form.appendChild(input);
+
+    document.body.appendChild(form);
+	form.submit();
+    document.body.removeChild(form);
+}
+
 function updateTimer(timer, remaining) {
 	remaining -= 1000;
 	var minutes = Math.floor(remaining / 60000);
@@ -42,13 +64,16 @@ function updateTimer(timer, remaining) {
 }
 
 function runTimer(interval, doneText) {
-	if (!running) {
+	var timer = document.getElementById("timer");
+
+	if (typeof(i_d) == 'undefined') {
+		timer.innerHTML = 'Please select a task';
+	} else if (!running) {
 		console.log("Starting timer...");
 		running = true;
 
 		var start = new Date;
 		var bell = document.getElementById("bell");
-		var timer = document.getElementById("timer");
 		
 		// Update the text initially
 		// Start with 1 sec. extra because updateTimer subtracts a sec.
@@ -67,6 +92,12 @@ function runTimer(interval, doneText) {
 			running = false;
 			clearInterval(updater);
 			clearInterval(finished);
+			var post = setInterval(function() {
+				if (interval == pomodoroInterval) {
+					postToView('timer', i_d);
+					clearInterval(post);
+				}
+			}, 1500);
 		}, interval);
 	}
 }
