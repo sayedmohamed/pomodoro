@@ -83,3 +83,19 @@ def login(request):
 		message = ''
 	
 	return render(request, 'login.html', dictionary={'view': 'login', 'auth': auform, 'msg': message})
+
+def register(request):
+	form = auforms.UserCreationForm()
+
+	if request.method == 'POST':
+		form = auforms.UserCreationForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			u = request.POST['username']
+			p = request.POST['password1']
+			user = auth.authenticate(username=u, password=p)
+			auth.login(request, user)
+			return HttpResponseRedirect('login/')
+	
+	return render(request, 'register.html', dictionary={'form': form})
+
